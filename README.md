@@ -4,8 +4,10 @@
 
 `node build.mjs` 获取公开快照并验证，再生成 `_site/`。浏览器只请求同源 `feed.json`，不直接请求原平台。构建失败会停止发布，保留上一个已部署版本；页面显示快照日期，超过一天提示过期。
 
-发布到 GitHub Pages 时，根目录放置 `index.html`、`reader.css`、`reader.js`、`build.mjs`，将 `publish.yml` 放入 `.github/workflows/`，并在仓库 Pages 设置中选择 GitHub Actions。工作流仅使用短期 Pages 发布权限，不需要添加原网站凭据或私人数据。
+发布到 GitHub Pages 时，根目录放置 `index.html`、`reader.css`、`reader.js`、`filter-core.js`、`build.mjs`，将 `publish.yml` 放入 `.github/workflows/`，并在仓库 Pages 设置中选择 GitHub Actions。工作流仅使用短期 Pages 发布权限，不需要添加原网站凭据或私人数据。
 
 工作流每小时17、47分检查更新，实际触发可能延迟。GitHub 可在公开仓库长期无活动后停止定时工作流，需要账户持有人定期检查。独立入口避免依赖原平台访客入口，不代表任何地区或IP的网络可达性保证。
 
 本目录不是新的账户或授权系统；不要放入 `.dev.vars`、数据库、私人内容备份或第三方服务令牌。更换托管平台时可以直接使用 `_site/` 的静态文件，并分别验证国内外网络及HTTPS。
+
+2026-10-31：新增独立搜索和高级筛选，使用主站同一日期、形式、有效性和排序规则生成的 filter-core.js。公开快照仅增加公开来源ID、分类、标签、嘉宾姓名与核验提示；不导出正文、配置或用户状态。发布时间与举办时间始终独立标注，无可靠举办时间则提示待核验。
